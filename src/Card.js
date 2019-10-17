@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {choice} from './Hiragana';
 import Character from './Character';
+import './Card.css';
 
 class Card extends Component {
   constructor(props) {
     super(props);
-    this.state = {quest_char: choice(), answer: ''}
+    this.state = {isAnswered: false, quest: choice(), answer: ''}
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -14,24 +15,34 @@ class Card extends Component {
   }
   handleSubmit(evt) {
     evt.preventDefault();
-    if(this.state.quest_char.ro === this.state.answer) {
-      alert('ok');
-    }else{
-      alert('not ok');
+
+    if(this.state.isAnswered) { //next quetion
+      this.setState({quest: choice(), answer: ''});
+    } else {
+      if(this.state.quest.ro === this.state.answer) { //validate answer
+        alert('ok');
+
+      }else{
+        alert('not ok');
+      }
     }
+
+    this.setState(st => ({
+      isAnswered: !st.isAnswered
+    }));
   }
   render() {
     return (
-      <div>
-        <Character char={this.state.quest_char.char} />
+      <div className='Card'>
+        <Character char={this.state.quest.char} />
         <form onSubmit={this.handleSubmit}>
           <input 
             type='text' 
-            placeholder='answer'
+            placeholder={this.state.done ? this.state.quest.char : 'answer'}
             value={this.state.answer}
             onChange={this.handleChange} 
           />
-          <button>Submit</button>
+          <button id='Card-button'>{this.state.isAnswered ? 'Next' : 'Submit'}</button>  
         </form>
       </div>
     );

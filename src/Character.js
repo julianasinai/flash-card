@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import './Character.css'
 
 class Character extends Component {
   render() {
-    return <div>{this.props.char}</div>
+    return <div className='Character'>{this.props.char}</div>
   }
 }
 
