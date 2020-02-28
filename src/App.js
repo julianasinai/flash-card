@@ -1,14 +1,16 @@
-import React from 'react';
-import Character from './Character';
-import './App.css';
-import Card from './Card';
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Flashcard from './Flashcard';
 
-function App() {
-  return (
-    <div className="App">
-      <Card />
-    </div>
-  );
+class App extends Component {
+  render() {
+    return(
+      <Switch>
+        <Route exact path='/' render={() => <Flashcard />} />
+        <Route exact path='/results' render={() => <h1>Results</h1>} />
+      </Switch>
+    );
+  }
 }
 
 export default App;
