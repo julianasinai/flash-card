@@ -1,13 +1,36 @@
 import React, { Component } from 'react';
 import { choice } from './Hiragana';
-import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/styles';
+
+const styles = {
+  root: {
+    height: '350px',
+    width: '350px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  question: {
+
+  },
+  title: {
+    fontSize: '4.5em',
+    fontWeight: 'bold'
+  },
+  answer: {
+    display: 'flex',
+    flexDirection: 'column'
+  }, 
+  button: {
+    marginTop: '10px'
+  }
+}
 
 class Flashcard extends Component {
   constructor(props) {
@@ -41,33 +64,34 @@ class Flashcard extends Component {
     }));
   }
   render() {
+    const { classes } = this.props;
     return (
-      <Container>
-        <Card>
-          <CardContent>
-            <Typography>{this.state.question.char}</Typography>
-          </CardContent>
-          <CardActions>
-            <form onSubmit={this.handleSubmit}>
-                <TextField
-                  id='answer'
-                  value={this.state.answer}
-                  onChange={this.handleChange}
-                  label='Answer'
-                /> 
-                <Button
-                  type='submit'
-                  color='primary'
-                  variant='contained'
-                >
-                  {this.state.isAnswered ? 'Next' : 'Submit'}
-                </Button>
-            </form>
-          </CardActions>
-        </Card>
-      </Container>
+      <Card className={classes.root}>
+        <CardContent className={classes.question}>
+          <Typography className={classes.title}>{this.state.question.char}</Typography>
+        </CardContent>
+        <CardActions>
+          <form  className={classes.answer} onSubmit={this.handleSubmit}>
+              <TextField
+                id='answer'
+                variant='outlined'
+                value={this.state.answer}
+                onChange={this.handleChange}
+                label='Answer'
+              /> 
+              <Button
+                type='submit'
+                color='primary'
+                variant='contained'
+                className={classes.button}
+              >
+                {this.state.isAnswered ? 'Next' : 'Submit'}
+              </Button>
+          </form>
+        </CardActions>
+      </Card>
     );
   }
 }
 
-export default Flashcard;
+export default withStyles(styles)(Flashcard);
