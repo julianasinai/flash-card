@@ -5,12 +5,13 @@ import Flashcard from './Flashcard';
 
 const styles = {
   root: {
-  
+    padding: 0,
+    margin: 0,
+    height: '100vh'
   }
 }
 
 class Play extends Component {
-
   render() {
     const { classes } = this.props;
     return(

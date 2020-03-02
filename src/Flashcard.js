@@ -15,6 +15,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    margin: '50px auto'
   },
   question: {
 
